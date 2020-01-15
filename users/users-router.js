@@ -6,9 +6,9 @@ const router = express.Router()
 
 function restricted() {
   const authError = {
-    message: "Invalid credentials"
+    message: "Invalid credentials" // message in a variable se we can reuse it.
   }
-  
+
   return async (req, res, next) => {
     try {
       // authorize the user here
@@ -23,7 +23,8 @@ function restricted() {
         return res.status(401).json(authError)
       }
 
-      const passwordValid = await bcrypt.compare(passord, user.password)
+      const passwordValid = await bcrypt.compare(password, user.password)
+      // make sure password is correct
       if (!passwordValid) {
         return res.status(401).json(authError)
       }
@@ -35,7 +36,7 @@ function restricted() {
   }
 }
 
-router.get("/", async (req, res, next) => {
+router.get("/", restricted(), async (req, res, next) => {
   try {
     const users = await usersModel.find()
     
