@@ -14,7 +14,7 @@ function findBy(filter) {
 
 async function add(user) {
   user.password = await bcrypt.hash(user.password, 12) 
-  // rounds is 2^ (to the power of) 10 === 1,024. request should take 1-2 seconds to complete.
+  // rounds is 2^ (to the power of) 10 === 1,024. request should take 1-2 seconds to complete. Time hash is not sensitive at all 
 
   const [id] = await db("users")
     .insert(user)
