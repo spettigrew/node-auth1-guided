@@ -6,7 +6,7 @@ const router = express.Router()
 
 function restricted() {
   const authError = {
-    message: "Invalid credentials" // message in a variable se we can reuse it.
+    message: "Invalid credentials" // message in a variable so we can reuse it.
   }
 
   return async (req, res, next) => {
